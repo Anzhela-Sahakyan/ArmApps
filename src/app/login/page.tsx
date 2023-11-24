@@ -37,7 +37,7 @@ export default function SignInPage() {
   }, [user]);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py2">
-      <h1 className="text-center text-2xl m-2">
+      <h1 className="text-center text-2xl m-2 bg-primary">
         {loading ? "loading" : "Log in"}
       </h1>
       <hr />
