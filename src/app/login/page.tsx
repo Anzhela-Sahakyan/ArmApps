@@ -3,7 +3,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
+import styles from "./login.module.css";
 export default function SignInPage() {
   const router = useRouter();
 
@@ -37,35 +39,47 @@ export default function SignInPage() {
   }, [user]);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py2">
-      <h1 className="text-center text-2xl m-2 bg-primary">
-        {loading ? "loading" : "Log in"}
-      </h1>
+      <Box className={styles.header_layout}>
+        <Typography className={styles.header}>
+          {loading ? "Loading" : "Sign in"}{" "}
+        </Typography>
+      </Box>
       <hr />
+      <Box>
+        <Box className={styles.email_box_label_layout}>
+          <Typography className={styles.email_box_label}>
+            Email address
+          </Typography>
+        </Box>
+        <Box>
+          <TextField
+            className={styles.email_box}
+            id="outlined-basic"
+            variant="outlined"
+            value={user.email}
+            type="text"
+            onChange={(e) => setUser({ ...user, email: e.target.value })}
+          />
+        </Box>
+      </Box>
+      <Box>
+        <Typography className={styles.password_box_label}>Password</Typography>
+        <TextField
+          className={styles.password_box}
+          id="outlined-basic"
+          type="password"
+          value={user.password}
+          onChange={(e) => setUser({ ...user, password: e.target.value })}
+        />
+      </Box>
 
-      <label htmlFor="email">email</label>
-      <input
-        className="p-2 border-gray-300 rounded-lg mb-4 focus: outline-none focus: border-gray-600"
-        id="email"
-        type="text"
-        value={user.email}
-        onChange={(e) => setUser({ ...user, email: e.target.value })}
-        placeholder="email"
-      />
-      <label htmlFor="password">password</label>
-      <input
-        className="p-2 border-gray-300 rounded-lg mb-4 focus: outline-none focus: border-gray-600"
-        id="password"
-        type="password"
-        value={user.password}
-        onChange={(e) => setUser({ ...user, password: e.target.value })}
-        placeholder="password"
-      />
-      <button
+      <Button
+        className="bg-blue-500 mt-4 hover:bg-blue-700 text-white
+       font-bold py-2 px-4"
         onClick={onLogin}
-        className="p-2 border-black-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
       >
         {buttonDisabled ? "No log in" : "Log in"}
-      </button>
+      </Button>
       <Link href="/signin">Open Signin Page</Link>
     </div>
   );
