@@ -31,6 +31,7 @@ export default function SignInPage() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const togglePassword = () => {
     setShowPassword(!showPassword);
@@ -43,10 +44,15 @@ export default function SignInPage() {
         rememberMe,
       });
       console.log(response);
-
-      router.push("/profile");
+      if (response.data.success) {
+        router.push("/profile");
+      } else {
+        setErrorMessage(response.data.error);
+        console.log("login failed", errorMessage);
+      }
     } catch (error: any) {
-      console.log("Login failed", error.message);
+      console.error(error);
+      setErrorMessage(error.message);
     } finally {
       setLoading(false);
     }
@@ -59,14 +65,22 @@ export default function SignInPage() {
     }
   }, [user]);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py2">
+    <Box className={styles.layout}>
       <Box className={styles.header_layout}>
         <Typography className={styles.header}>
           {loading ? "Loading" : "Sign in"}{" "}
         </Typography>
       </Box>
-      <hr />
-      <Box>
+
+      {errorMessage && (
+        <Box className={styles.error_msg_layout}>
+          <Typography className={styles.error_msg} color="error">
+            Sign in failed. Please enter correct email and password.
+          </Typography>
+        </Box>
+      )}
+
+      <Box className={styles.email}>
         <Box className={styles.email_box_label_layout}>
           <Typography className={styles.email_box_label}>
             Email address
@@ -126,14 +140,10 @@ export default function SignInPage() {
           label="Remeber me"
         />
       </Box>
-      <Button
-        className="bg-blue-500 mt-4 hover:bg-blue-700 text-white
-       font-bold py-2 px-4"
-        onClick={onLogin}
-      >
+      <Button className={styles.btn} onClick={onLogin}>
         {buttonDisabled ? "No sign in" : "Sign in"}
       </Button>
       <Link href="/signin">Open Signup Page</Link>
-    </div>
+    </Box>
   );
 }

@@ -1,3 +1,14 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  gap: 14px;
+}
+
 .header {
   font-weight: 700;
   font-size: 24px;
@@ -7,24 +18,34 @@
 .header_layout {
   width: 90px;
   height: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+}
+
+.error_msg_layout {
+  border: 1px #f4635e dashed;
+  margin: 20px 0;
+  width: 383px;
+  height: 40px;
+  text-align: center;
+  border-radius: 8px;
+  padding: 10px;
+}
+.error_msg {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.email_box_label {
+  font-weight: 400;
+  size: 16px;
+  line-height: 20px;
 }
 .email_box {
   border-radius: 8px;
   width: 383px;
   height: 40px;
   border: 1px;
-}
-
-.email_box_label {
-  font-weight: 400;
-  size: 16px;
-
-  line-height: 20px;
-}
-.email_box_label_layout {
-  width: 105px;
-  height: 20px;
 }
 .password_box {
   border-radius: 8px;
@@ -45,4 +66,23 @@
 
   width: 383px;
   height: 40px;
+}
+
+.btn {
+  background-color: #00b9ff;
+  width: 77px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px;
+  margin-top: 1rem #00b9ff;
+  padding: 11px, 16px, 11px, 16px;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #ffffff;
+}
+
+.btn:hover {
+  background-color: #2563eb;
 }
