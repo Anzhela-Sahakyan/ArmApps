@@ -38,25 +38,26 @@
 
 .email_box_label {
   font-weight: 400;
-  size: 16px;
+  font-size: 16px;
   line-height: 20px;
 }
 .email_box {
+  border: 1px solid #dde0e3;
   border-radius: 8px;
   width: 383px;
   height: 40px;
-  border: 1px;
 }
 .password_box {
+  border: 1px solid #dde0e3;
   border-radius: 8px;
   width: 383px;
   height: 40px;
-  border: 1px;
+
   margin-bottom: 40px;
 }
 .password_box_label {
   font-weight: 400;
-  size: 16px;
+  font-size: 16px;
   line-height: 20px;
   margin-top: 40px;
 }
@@ -85,4 +86,12 @@
 
 .btn:hover {
   background-color: #2563eb;
+}
+
+.error_borders {
+  border: 1px solid #f4635e;
+  border-radius: 8px;
+  width: 383px;
+  height: 40px;
+  margin-bottom: 40px;
 }

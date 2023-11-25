@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import images from "../../Data/images";
+import { styled } from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import {
@@ -88,7 +89,7 @@ export default function SignInPage() {
         </Box>
         <Box>
           <TextField
-            className={styles.email_box}
+            className={errorMessage ? styles.error_borders : styles.email_box}
             id="outlined-basic"
             variant="outlined"
             value={user.email}
@@ -100,7 +101,7 @@ export default function SignInPage() {
       <Box>
         <Typography className={styles.password_box_label}>Password</Typography>
         <TextField
-          className={styles.password_box}
+          className={errorMessage ? styles.error_borders : styles.password_box}
           id="outlined-basic"
           type={showPassword ? "text" : "password"}
           value={user.password}
@@ -141,7 +142,7 @@ export default function SignInPage() {
         />
       </Box>
       <Button className={styles.btn} onClick={onLogin}>
-        {buttonDisabled ? "No sign in" : "Sign in"}
+        Sign in
       </Button>
       <Link href="/signin">Open Signup Page</Link>
     </Box>
