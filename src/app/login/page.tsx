@@ -3,9 +3,22 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import Image from "next/image";
+import images from "../../Data/images";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 import styles from "./login.module.css";
+
 export default function SignInPage() {
   const router = useRouter();
 
@@ -16,11 +29,19 @@ export default function SignInPage() {
 
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
   const onLogin = async () => {
     try {
       setLoading(true);
-      const response = await axios.post("api/users/login", user);
+      const response = await axios.post("api/users/login", {
+        ...user,
+        rememberMe,
+      });
       console.log(response);
 
       router.push("/profile");
@@ -67,20 +88,52 @@ export default function SignInPage() {
         <TextField
           className={styles.password_box}
           id="outlined-basic"
-          type="password"
+          type={showPassword ? "text" : "password"}
           value={user.password}
           onChange={(e) => setUser({ ...user, password: e.target.value })}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Image
+                  src={images.eyeIcon}
+                  alt="show_pass_icon"
+                  width="20"
+                  height="20"
+                  style={{
+                    marginTop: "3px",
+                    marginLeft: "1.86px",
+                    cursor: "pointer",
+                  }}
+                  onClick={togglePassword}
+                />
+              </InputAdornment>
+            ),
+          }}
         />
       </Box>
-
+      <Box className={styles.checkbox}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              defaultChecked
+              checked={rememberMe}
+              onChange={() => {
+                setRememberMe(!rememberMe);
+              }}
+            />
+          }
+          className={styles.checkbox}
+          label="Remeber me"
+        />
+      </Box>
       <Button
         className="bg-blue-500 mt-4 hover:bg-blue-700 text-white
        font-bold py-2 px-4"
         onClick={onLogin}
       >
-        {buttonDisabled ? "No log in" : "Log in"}
+        {buttonDisabled ? "No sign in" : "Sign in"}
       </Button>
-      <Link href="/signin">Open Signin Page</Link>
+      <Link href="/signin">Open Signup Page</Link>
     </div>
   );
 }
