@@ -1,4 +1,4 @@
-.layout {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,6 +6,12 @@
   min-height: 100vh;
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 14px;
 }
 
@@ -41,19 +47,10 @@
   font-size: 16px;
   line-height: 20px;
 }
-.email_box {
+.input_box {
   border: 1px solid #dde0e3;
   border-radius: 8px;
   width: 383px;
-  height: 40px;
-}
-.password_box {
-  border: 1px solid #dde0e3;
-  border-radius: 8px;
-  width: 383px;
-  height: 40px;
-
-  margin-bottom: 40px;
 }
 .password_box_label {
   font-weight: 400;
@@ -63,10 +60,7 @@
 }
 
 .checkbox {
-  display: flex;
-
-  width: 383px;
-  height: 40px;
+  align-self: flex-start;
 }
 
 .btn {
@@ -75,7 +69,7 @@
   height: 40px;
   border-radius: 8px;
   border: 1px;
-  margin-top: 1rem #00b9ff;
+  margin-top: 1rem;
   padding: 11px, 16px, 11px, 16px;
   gap: 8px;
   font-size: 14px;
@@ -84,14 +78,14 @@
   color: #ffffff;
 }
 
+.btn_disabled {
+  opacity: 80%;
+  background-color: #c7c3c3;
+}
 .btn:hover {
   background-color: #2563eb;
 }
 
 .error_borders {
   border: 1px solid #f4635e;
-  border-radius: 8px;
-  width: 383px;
-  height: 40px;
-  margin-bottom: 40px;
 }

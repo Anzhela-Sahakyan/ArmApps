@@ -5,8 +5,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import images from "../../Data/images";
-import { styled } from "@mui/system";
+import { ThemeProvider } from "@mui/system";
+import theme from "@/theme";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { combineClasses } from "@/utils/style.utils";
 
 import {
   Box,
@@ -20,19 +22,19 @@ import {
 
 import styles from "./login.module.css";
 
-export default function SignInPage() {
+export default function LoginPage() {
   const router = useRouter();
 
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-
-  const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const isButtonDisabled = !user.email || !user.password;
 
   const togglePassword = () => {
     setShowPassword(!showPassword);
@@ -58,93 +60,106 @@ export default function SignInPage() {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    if (user.email.length > 0 && user.password.length > 0) {
-      setButtonDisabled(false);
-    } else {
-      setButtonDisabled(true);
-    }
-  }, [user]);
   return (
-    <Box className={styles.layout}>
-      <Box className={styles.header_layout}>
-        <Typography className={styles.header}>
-          {loading ? "Loading" : "Sign in"}{" "}
-        </Typography>
-      </Box>
-
-      {errorMessage && (
-        <Box className={styles.error_msg_layout}>
-          <Typography className={styles.error_msg} color="error">
-            Sign in failed. Please enter correct email and password.
+    <Box className={styles.container}>
+      <Box className={styles.layout}>
+        <Box className={styles.header_layout}>
+          <Typography className={styles.header}>
+            {loading ? "Loading" : "Sign in"}{" "}
           </Typography>
         </Box>
-      )}
 
-      <Box className={styles.email}>
-        <Box className={styles.email_box_label_layout}>
-          <Typography className={styles.email_box_label}>
-            Email address
-          </Typography>
+        {errorMessage && (
+          <Box className={styles.error_msg_layout}>
+            <Typography className={styles.error_msg} color="error">
+              Sign in failed. Please enter correct email and password.
+            </Typography>
+          </Box>
+        )}
+
+        <Box>
+          <Box>
+            <Typography className={styles.email_box_label}>
+              Email address
+            </Typography>
+          </Box>
+          <Box>
+            <TextField
+              className={combineClasses(
+                styles.input_box,
+                errorMessage ? styles.error_borders : undefined
+              )}
+              size="small"
+              id="outlined-basic"
+              variant="outlined"
+              value={user.email}
+              type="text"
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+            />
+          </Box>
         </Box>
         <Box>
+          <Typography className={styles.password_box_label}>
+            Password
+          </Typography>
           <TextField
-            className={errorMessage ? styles.error_borders : styles.email_box}
+            className={combineClasses(
+              styles.input_box,
+              errorMessage ? styles.error_borders : undefined
+            )}
+            size="small"
             id="outlined-basic"
-            variant="outlined"
-            value={user.email}
-            type="text"
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
+            type={showPassword ? "text" : "password"}
+            value={user.password}
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Image
+                    src={images.eyeIcon}
+                    alt="show_pass_icon"
+                    width="20"
+                    height="20"
+                    style={{
+                      marginTop: "3px",
+                      marginLeft: "1.86px",
+                      cursor: "pointer",
+                    }}
+                    onClick={togglePassword}
+                  />
+                </InputAdornment>
+              ),
+            }}
           />
         </Box>
+        <Box className={styles.checkbox}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                defaultChecked
+                checked={rememberMe}
+                onChange={() => {
+                  setRememberMe(!rememberMe);
+                }}
+              />
+            }
+            className={styles.checkbox}
+            label="Remember me"
+          />
+        </Box>
+        <Button
+          disabled={isButtonDisabled}
+          className={combineClasses(
+            styles.btn,
+            isButtonDisabled ? styles.btn_disabled : undefined
+          )}
+          sx={{ color: "white" }}
+          onClick={onLogin}
+        >
+          Sign in
+        </Button>
+        <Link href="/signin">Open Signup Page</Link>
       </Box>
-      <Box>
-        <Typography className={styles.password_box_label}>Password</Typography>
-        <TextField
-          className={errorMessage ? styles.error_borders : styles.password_box}
-          id="outlined-basic"
-          type={showPassword ? "text" : "password"}
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Image
-                  src={images.eyeIcon}
-                  alt="show_pass_icon"
-                  width="20"
-                  height="20"
-                  style={{
-                    marginTop: "3px",
-                    marginLeft: "1.86px",
-                    cursor: "pointer",
-                  }}
-                  onClick={togglePassword}
-                />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Box>
-      <Box className={styles.checkbox}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              defaultChecked
-              checked={rememberMe}
-              onChange={() => {
-                setRememberMe(!rememberMe);
-              }}
-            />
-          }
-          className={styles.checkbox}
-          label="Remeber me"
-        />
-      </Box>
-      <Button className={styles.btn} onClick={onLogin}>
-        Sign in
-      </Button>
-      <Link href="/signin">Open Signup Page</Link>
     </Box>
   );
 }
