@@ -7,6 +7,7 @@ import images from "@/Data/images";
 import Link from "next/link";
 
 import { useRouter } from "next/navigation";
+import SearchAndFilter from "./profileComponents/searchAndFilter";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -58,15 +59,9 @@ export default function ProfilePage() {
             onClick={logout}
           />
         </Box>
-        {/* <Box>
-        <button
-          onClick={logout}
-          className="bg-blue-500 mt-4 hover:bg-blue-700 text-white
-       font-bold py-2 px-4"
-        >
-          Log Out
-        </button>
-      </Box> */}
+      </Box>
+      <Box sx={{ display: "flex", flexDirection: "row" }}>
+        <SearchAndFilter />
       </Box>
     </Box>
   );
