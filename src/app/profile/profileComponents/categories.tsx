@@ -32,10 +32,10 @@ export default function Categories({ filterName, items }: CategoriesProps) {
   };
   return (
     <Box>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl>
         <InputLabel id="demo-simple-select-label">{filterName}</InputLabel>
         <Select
-          sx={{ width: "200px", height: "42px" }}
+          sx={{ width: "200px", height: "40px", margin: "10px 5px" }}
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple

@@ -7,7 +7,7 @@ export default function Searchfield() {
       label="Search"
       size="small"
       variant="outlined"
-      sx={{ borderRadius: "8px" }}
+      sx={{ borderRadius: "8px", border: "none" }}
     />
   );
 }

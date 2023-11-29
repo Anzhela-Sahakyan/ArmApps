@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@mui/material";
+import { Button, Menu, MenuItem } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import Image from "next/image";
@@ -8,8 +8,21 @@ import Link from "next/link";
 
 import { useRouter } from "next/navigation";
 import SearchAndFilter from "./profileComponents/searchAndFilter";
+import { useState } from "react";
+import AddApp from "./profileComponents/addApp";
+
+import styles from "./profileComponents/page.module.css";
 
 export default function ProfilePage() {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLImageElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const router = useRouter();
   const logout = async () => {
     try {
@@ -30,8 +43,6 @@ export default function ProfilePage() {
           width: "100%",
           height: "80px",
         }}
-        //   className="flex flex-col items-center
-        // justify-center "
       >
         <Box sx={{ display: "flex", flexDirection: "row" }}>
           <Button variant="text">Application</Button>
@@ -46,6 +57,9 @@ export default function ProfilePage() {
         >
           <Image
             src={images.profilePicIcon}
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
             alt="show_pass_icon"
             width="20"
             height="20"
@@ -56,12 +70,31 @@ export default function ProfilePage() {
 
               cursor: "pointer",
             }}
-            onClick={logout}
+            onClick={handleClick}
           />
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem onClick={logout}>Log Out</MenuItem>
+          </Menu>
         </Box>
       </Box>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <SearchAndFilter />
+        <AddApp />
       </Box>
     </Box>
   );

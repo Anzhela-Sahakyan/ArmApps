@@ -6,9 +6,9 @@ const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
-          border: "1px solid #dde0e3",
-          borderRadius: "8px",
-          width: "383px",
+          // border: "1px solid #dde0e3",
+          // borderRadius: "8px",
+          // width: "383px",
         },
       },
     },
