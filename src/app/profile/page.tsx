@@ -12,6 +12,8 @@ import { useState } from "react";
 import AddApp from "./profileComponents/addApp";
 
 import styles from "./profileComponents/page.module.css";
+import Application from "./applicationList/application";
+import apps from "@/Data/apps";
 
 export default function ProfilePage() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -33,6 +35,7 @@ export default function ProfilePage() {
       console.log(error.message);
     }
   };
+
   return (
     <Box>
       <Box
@@ -96,6 +99,7 @@ export default function ProfilePage() {
         <SearchAndFilter />
         <AddApp />
       </Box>
+      <Application apps={apps} />
     </Box>
   );
 }
