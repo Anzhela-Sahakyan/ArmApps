@@ -68,7 +68,8 @@ export default function Application({
                     sx={{ width: "24px", height: "24px" }}
                   />
                 </IconButton>
-
+              </TableCell>
+              <TableCell>
                 <IconButton aria-label="delete">
                   <Avatar
                     alt="edit_icon"

@@ -1,19 +1,10 @@
 import { Box } from "@mui/system";
 import Categories from "./categories";
 import Searchfield from "./searchfield";
-import AddApp from "./addApp";
+import categoriesAray from "@/Data/categories";
+import platformFilterArray from "@/Data/platformFilterArray";
 
 export default function SearchAndFilter() {
-  const categories = [
-    { value: "Կրթական", label: "Կրթական" },
-    { value: "Խաղեր", label: "Խաղեր" },
-    { value: "Ծրագրեր", label: "Ծրագրեր" },
-  ];
-  const platform = [
-    { value: "Sololearn", label: "Sololearn" },
-    { value: "Picsart", label: "Picsart" },
-    { value: "Sololearn1", label: "Sololearn1" },
-  ];
   return (
     <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
       <Box
@@ -26,10 +17,10 @@ export default function SearchAndFilter() {
       >
         <Searchfield />
         <Box>
-          <Categories filterName="Categories" items={categories} />
+          <Categories filterName="Categories" items={categoriesAray} />
         </Box>
         <Box>
-          <Categories filterName="Platform" items={platform} />
+          <Categories filterName="Platform" items={platformFilterArray} />
         </Box>
       </Box>
     </Box>

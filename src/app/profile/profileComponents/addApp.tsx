@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 
 import styles from "./page.module.css";
 
-export default function AddApp() {
+export default function AddApp({ onOpenAddAppDialog }: any) {
   return (
     <Box
       sx={{
@@ -19,6 +19,7 @@ export default function AddApp() {
         variant="contained"
         className={styles.btnAddNew}
         sx={{ width: "140px", height: "40px" }}
+        onClick={onOpenAddAppDialog}
       >
         Add new app
       </Button>
