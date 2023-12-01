@@ -2,7 +2,7 @@
 
 import { Box } from "@mui/system";
 import Header from "../profile/profileComponents/header";
-import Application from "./application";
+import Applications from "./Applications";
 import bannerApps from "@/Data/bannerApps";
 import { useState } from "react";
 import BannerSearchfield from "../profile/profileComponents/searchfield";
@@ -47,7 +47,7 @@ export default function BannersPage() {
         <BannerSearchfield />
         <AddBunnerBtn />
       </Box>
-      <Application apps={bannerApps} page={page} rowsPerPage={rowsPerPage} />
+      <Applications apps={bannerApps} page={page} rowsPerPage={rowsPerPage} />
       <BannerPagination
         totalItems={bannerApps.length}
         page={page}

@@ -6,17 +6,13 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-
-import ProfilePaginationFilter from "./ProfilePaginationFilter";
+import BannerPaginationFilter from "./BannerPaginationFilter";
 
 interface App {
   id: number | string;
   name: string;
-  icon: string;
-  title: string;
-  platform: string;
-  version: string;
-  store: string;
+  image: string;
+  showInMobile: boolean;
 }
 
 interface ApplicationProps {
@@ -36,15 +32,12 @@ export default function Application({
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
+            <TableCell>Image</TableCell>
             <TableCell>Name</TableCell>
-            <TableCell>Icon</TableCell>
-            <TableCell>Title</TableCell>
-            <TableCell>Platform</TableCell>
-            <TableCell>Version</TableCell>
-            <TableCell>Store</TableCell>
+            <TableCell>Show in mobile</TableCell>
           </TableRow>
         </TableHead>
-        <ProfilePaginationFilter
+        <BannerPaginationFilter
           apps={apps}
           page={page}
           rowsPerPage={rowsPerPage}
