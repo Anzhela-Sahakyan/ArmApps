@@ -50,8 +50,8 @@ export default function BannerPaginationFilter({
           <TableCell>
             <IconButton aria-label="delete">
               <Avatar
-                alt="delete"
-                src="/assets/delete.png"
+                alt="edit_icon"
+                src="/assets/edit.png"
                 sx={{ width: "24px", height: "24px" }}
               />
             </IconButton>
@@ -59,8 +59,8 @@ export default function BannerPaginationFilter({
           <TableCell>
             <IconButton aria-label="delete">
               <Avatar
-                alt="edit_icon"
-                src="/assets/edit.png"
+                alt="delete"
+                src="/assets/delete.png"
                 sx={{ width: "24px", height: "24px" }}
               />
             </IconButton>

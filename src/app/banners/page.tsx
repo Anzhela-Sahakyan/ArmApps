@@ -8,17 +8,18 @@ import { useState } from "react";
 import BannerSearchfield from "../profile/profileComponents/searchfield";
 import AddBunnerBtn from "./AddBunnerBtn";
 import BannerPagination from "./BannerPagination";
+import AddBannerPopUp from "./AddBannerPopUp";
 
 export default function BannersPage() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [isAddAppOpen, setAddAppOpen] = useState(false);
+  const [isAddBannerOpen, setIsAddBannerOpen] = useState(false);
 
   const handleOPenAddApp = () => {
-    setAddAppOpen(true);
+    setIsAddBannerOpen(true);
   };
   const handleCloseAddApp = () => {
-    setAddAppOpen(false);
+    setIsAddBannerOpen(false);
   };
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -45,7 +46,7 @@ export default function BannersPage() {
         }}
       >
         <BannerSearchfield />
-        <AddBunnerBtn />
+        <AddBunnerBtn onOpenAddAppDialog={handleOPenAddApp} />
       </Box>
       <Applications apps={bannerApps} page={page} rowsPerPage={rowsPerPage} />
       <BannerPagination
@@ -55,6 +56,7 @@ export default function BannersPage() {
         handleChangePage={handleChangePage}
         handleChangeRowsPerPage={handleChangeRowsPerPage}
       />
+      <AddBannerPopUp isOpen={isAddBannerOpen} onClose={handleCloseAddApp} />
     </Box>
   );
 }

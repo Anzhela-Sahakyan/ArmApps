@@ -9,10 +9,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import { Box } from "@mui/system";
 import categoriesAray from "@/Data/categories";
-import Categories from "./categories";
 import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 
-const AddAppPopUp = ({ isOpen, onClose }: any) => {
+const AddBannerPopUp = ({ isOpen, onClose }: any) => {
   return (
     <Dialog open={isOpen} onClose={onClose}>
       <Box
@@ -22,7 +21,7 @@ const AddAppPopUp = ({ isOpen, onClose }: any) => {
           justifyContent: "space-between",
         }}
       >
-        <DialogTitle>Add New App</DialogTitle>
+        <DialogTitle>Add New Banner</DialogTitle>
         <IconButton
           sx={{ marginRight: "18px" }}
           aria-label="close"
@@ -33,7 +32,7 @@ const AddAppPopUp = ({ isOpen, onClose }: any) => {
       </Box>
       <DialogContent>
         <TextField
-          label="App Name"
+          label="Banner Name"
           name="appName"
           fullWidth
           margin="normal"
@@ -41,24 +40,19 @@ const AddAppPopUp = ({ isOpen, onClose }: any) => {
         />
 
         <TextField
-          label="Google Play URL"
+          label="Banner URL"
           name="googlePlayUrl"
           fullWidth
           margin="normal"
         />
-        <TextField
-          label="App Store URL"
-          name="appStoreUrl"
-          fullWidth
-          margin="normal"
-        />
+
         <Button
           variant="contained"
           component="label"
           size="small"
           sx={{ marginTop: "15px" }}
         >
-          Upload Header Image
+          Upload Banner Image
           <input type="file" hidden />
         </Button>
         <Box
@@ -71,7 +65,6 @@ const AddAppPopUp = ({ isOpen, onClose }: any) => {
             labelPlacement="start"
           />
         </Box>
-        <Categories filterName="Categories" items={categoriesAray} />
       </DialogContent>
       <DialogActions>
         <Button variant="outlined" onClick={onClose} color="primary">
@@ -85,4 +78,4 @@ const AddAppPopUp = ({ isOpen, onClose }: any) => {
   );
 };
 
-export default AddAppPopUp;
+export default AddBannerPopUp;

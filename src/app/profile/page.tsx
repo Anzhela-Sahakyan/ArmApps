@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { connect } from "@/dbConfig/dbConfig";
-import AddAppDialog from "./profileComponents/addAppPopUp";
+import AddAppPopUp from "./profileComponents/addAppPopUp";
 
 export default function ProfilePage() {
   const [page, setPage] = useState(0);
@@ -60,7 +60,7 @@ export default function ProfilePage() {
         handleChangePage={handleChangePage}
         handleChangeRowsPerPage={handleChangeRowsPerPage}
       />
-      <AddAppDialog isOpen={isAddAppOpen} onClose={handleCloseAddApp} />
+      <AddAppPopUp isOpen={isAddAppOpen} onClose={handleCloseAddApp} />
     </Box>
   );
 }
