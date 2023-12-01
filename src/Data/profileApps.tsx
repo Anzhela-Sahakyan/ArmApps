@@ -1,4 +1,4 @@
-const apps = [
+const profileApps = [
   {
     id: 1,
     name: "Sololearn",
@@ -109,4 +109,4 @@ const apps = [
   },
 ];
 
-export default apps;
+export default profileApps;

@@ -8,16 +8,15 @@ import {
   Paper,
   Avatar,
   IconButton,
+  Checkbox,
 } from "@mui/material";
+import { useState } from "react";
 
 interface App {
   id: number | string;
   name: string;
-  icon: string;
-  title: string;
-  platform: string;
-  version: string;
-  store: string;
+  image: string;
+  showInMobile: boolean;
 }
 
 interface ApplicationProps {
@@ -35,18 +34,20 @@ export default function Application({
   const endIndex = startIndex + rowsPerPage;
 
   const displayedApps = apps.slice(startIndex, endIndex);
+
+  const [showInMobile, setShowInMobile] = useState(false);
+  const handleCheckboxChange = () => {
+    setShowInMobile((prev) => !prev);
+  };
   return (
     <TableContainer component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
+            <TableCell>Image</TableCell>
             <TableCell>Name</TableCell>
-            <TableCell>Icon</TableCell>
-            <TableCell>Title</TableCell>
-            <TableCell>Platform</TableCell>
-            <TableCell>Version</TableCell>
-            <TableCell>Store</TableCell>
+            <TableCell>Show in mobile</TableCell>
           </TableRow>
         </TableHead>
 
@@ -54,12 +55,15 @@ export default function Application({
           {displayedApps.map((app) => (
             <TableRow key={app.id}>
               <TableCell>{app.id}</TableCell>
+              <TableCell>{<Avatar alt={app.name} src={app.image} />}</TableCell>
               <TableCell>{app.name}</TableCell>
-              <TableCell>{<Avatar alt={app.name} src={app.icon} />}</TableCell>
-              <TableCell>{app.title}</TableCell>
-              <TableCell>{app.platform}</TableCell>
-              <TableCell>{app.version}</TableCell>
-              <TableCell>{app.store}</TableCell>
+              <TableCell>
+                <Checkbox
+                  checked={app.showInMobile}
+                  onChange={handleCheckboxChange}
+                />
+              </TableCell>
+
               <TableCell>
                 <IconButton aria-label="delete">
                   <Avatar

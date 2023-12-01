@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import images from "@/Data/images";
 
-export default function Banner() {
+export default function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLImageElement>) => {
@@ -38,9 +38,18 @@ export default function Banner() {
       }}
     >
       <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <Button variant="text">Application</Button>
+        <Button
+          variant="text"
+          onClick={() => {
+            router.push("/profile");
+          }}
+        >
+          Application
+        </Button>
         <Button variant="text">Categories</Button>
-        <Button variant="text">Banners</Button>
+        <Button variant="text" onClick={() => router.push("/banners")}>
+          Banners
+        </Button>
       </Box>
       <Box
         sx={{

@@ -1,7 +1,6 @@
-import apps from "@/Data/apps";
 import TablePagination from "@mui/material/TablePagination";
 
-interface PaginationProps {
+interface ApplicationPaginationProps {
   totalItems: number;
   page: number;
   rowsPerPage: number;
@@ -14,7 +13,7 @@ interface PaginationProps {
   ) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({
+const ApplicationPagination: React.FC<ApplicationPaginationProps> = ({
   totalItems,
   page,
   rowsPerPage,
@@ -34,4 +33,4 @@ const Pagination: React.FC<PaginationProps> = ({
   );
 };
 
-export default Pagination;
+export default ApplicationPagination;

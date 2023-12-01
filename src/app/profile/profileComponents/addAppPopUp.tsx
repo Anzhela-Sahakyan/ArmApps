@@ -59,7 +59,7 @@ const AddAppDialog = ({ isOpen, onClose }: any) => {
           size="small"
           sx={{ marginTop: "15px" }}
         >
-          Upload Banner Image
+          Upload Header Image
           <input type="file" hidden />
         </Button>
         <Box

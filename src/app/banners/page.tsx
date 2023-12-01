@@ -1,20 +1,15 @@
 "use client";
+
 import { Box } from "@mui/system";
+import Header from "../profile/profileComponents/header";
+import Application from "./application";
+import bannerApps from "@/Data/bannerApps";
+import { useState } from "react";
+import BannerSearchfield from "../profile/profileComponents/searchfield";
+import AddBunnerBtn from "./AddBunnerBtn";
+import BannerPagination from "./BannerPagination";
 
-import SearchAndFilter from "./profileComponents/searchAndFilter";
-import AddApp from "./profileComponents/addApp";
-
-import Application from "./applicationList/application";
-import profileApps from "@/Data/profileApps";
-import ApplicationPagination from "./applicationList/ApplicationPagination";
-import Header from "./profileComponents/header";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import axios from "axios";
-import { connect } from "@/dbConfig/dbConfig";
-import AddAppDialog from "./profileComponents/addAppPopUp";
-
-export default function ProfilePage() {
+export default function BannersPage() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [isAddAppOpen, setAddAppOpen] = useState(false);
@@ -49,18 +44,17 @@ export default function ProfilePage() {
           justifyContent: "space-between",
         }}
       >
-        <SearchAndFilter />
-        <AddApp onOpenAddAppDialog={handleOPenAddApp} />
+        <BannerSearchfield />
+        <AddBunnerBtn />
       </Box>
-      <Application apps={profileApps} page={page} rowsPerPage={rowsPerPage} />
-      <ApplicationPagination
-        totalItems={profileApps.length}
+      <Application apps={bannerApps} page={page} rowsPerPage={rowsPerPage} />
+      <BannerPagination
+        totalItems={bannerApps.length}
         page={page}
         rowsPerPage={rowsPerPage}
         handleChangePage={handleChangePage}
         handleChangeRowsPerPage={handleChangeRowsPerPage}
       />
-      <AddAppDialog isOpen={isAddAppOpen} onClose={handleCloseAddApp} />
     </Box>
   );
 }
