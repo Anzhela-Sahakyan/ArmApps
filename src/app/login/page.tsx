@@ -9,6 +9,7 @@ import { ThemeProvider } from "@mui/system";
 import theme from "@/theme";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { combineClasses } from "@/utils/style.utils";
+import { useTransition } from "react";
 
 import {
   Box,
@@ -33,6 +34,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   const isButtonDisabled = !user.email || !user.password;
 
@@ -42,19 +44,24 @@ export default function LoginPage() {
   const onLogin = async () => {
     try {
       setLoading(true);
-      const response = await axios.post("api/users/login", {
-        ...user,
-        rememberMe,
-      });
-      console.log(response);
-      if (response.data.success) {
-        router.push("/profile");
+      const response = await axios.post(
+        "http://localhost:3000/api/users/login",
+        {
+          ...user,
+          rememberMe,
+        }
+      );
+      console.log("response::::::::", response);
+      if (response.status === 200) {
+        setTimeout(() => router.push("/profile"), 1000);
+
+        console.log("status is  200");
       } else {
         setErrorMessage(response.data.error);
         console.log("login failed", errorMessage);
       }
     } catch (error: any) {
-      console.error(error);
+      console.error("error:::::", error);
       setErrorMessage(error.message);
     } finally {
       setLoading(false);

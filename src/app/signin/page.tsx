@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function SignInPage() {
@@ -23,7 +22,8 @@ export default function SignInPage() {
       )
     );
     setIsEmailValid(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(user.email));
-  }, [user]);
+  }, [user, isEmailValid, isPasswordValid, user.username.length]);
+
   const onSignin = async () => {
     try {
       if (!isEmailValid && !isPasswordValid) {
@@ -32,9 +32,18 @@ export default function SignInPage() {
       }
 
       setLoading(true);
-      const response = await axios.post("/api/users/signin", user);
-      console.log("signup success", response.data);
-      router.push("/login");
+
+      const response = await fetch("http://localhost:3002/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      if (response.ok) {
+        // console.log("signup success", response.data);
+        router.push("/login");
+      }
     } catch (error: any) {
       console.log(error.message, "sign up failed");
     } finally {
@@ -48,7 +57,7 @@ export default function SignInPage() {
     } else {
       setButtonDisabled(true);
     }
-  }, [user]);
+  }, [user, isEmailValid, isPasswordValid, user.username.length]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py2">

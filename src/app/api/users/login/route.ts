@@ -1,25 +1,22 @@
-import { connect } from "@/dbConfig/dbConfig";
-import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import axios from "axios";
+import { NextApiRequest, NextApiResponse } from "next";
 
-connect();
-
-export async function POST(request: NextRequest) {
+export async function POST(request: Request, response: NextApiResponse) {
   try {
-    const reqBody = await request.json();
-    const { email, password, rememberMe } = reqBody;
-    console.log(reqBody);
+    const requestBody = await request.json();
+    console.log("request body:::", requestBody);
+    const { email, password, rememberMe } = requestBody;
+    const { data: users } = await axios.get("http://localhost:3002/users");
 
-    const user = await User.findOne({ email });
+    const user = users.find((user: any) => user.email === email);
     if (!user) {
-      return NextResponse.json(
-        { error: "User does not exist" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
-    const validatePassword = await bcryptjs.compare(password, user.password);
+
+    const validatePassword = password === user.password;
     if (!validatePassword) {
       return NextResponse.json({ error: "Invalid password" }, { status: 400 });
     }
@@ -32,16 +29,17 @@ export async function POST(request: NextRequest) {
       expiresIn: rememberMe ? "30d" : "1d",
     });
 
-    const response = NextResponse.json({
+    const jsonResponse = NextResponse.json({
       message: "Login successful",
       success: true,
     });
-    response.cookies.set("token", token, {
+    jsonResponse.cookies.set("token", token, {
       httpOnly: true,
     });
 
-    return response;
+    return jsonResponse;
   } catch (error: any) {
+    console.log(error, "error:::");
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

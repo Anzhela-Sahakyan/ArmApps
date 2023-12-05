@@ -1,9 +1,6 @@
-import { connect } from "@/dbConfig/dbConfig";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-
-connect();
 
 export async function POST(request: NextRequest) {
   try {
@@ -34,7 +31,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       message: "User created successfully",
       success: true,
-      savedUser,
+      user: savedUser,
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
