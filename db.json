@@ -18,5 +18,386 @@
       "email": "user3@gmail.com",
       "password": "123456aA!"
     }
+  ],
+  "banners": [
+    {
+      "id": 1,
+      "name": "Sololearn",
+      "image": "/assets/sololearn.png",
+      "showInMobile": true
+    },
+    {
+      "id": 2,
+      "name": "PicsArt",
+      "image": "/assets/picsArt.png",
+      "showInMobile": true
+    },
+    {
+      "id": 3,
+      "name": "Sololearn Light",
+      "image": "/assets/sololearnLight.png",
+      "showInMobile": true
+    },
+    {
+      "id": 4,
+      "name": "Sololearn Light",
+      "image": "/assets/sololearnLight.png",
+      "showInMobile": true
+    },
+    {
+      "id": 5,
+      "name": "Sololearn Light",
+      "image": "/assets/sololearnLight.png",
+      "showInMobile": true
+    },
+    {
+      "id": 6,
+      "name": "Sololearn Light",
+      "image": "/assets/sololearnLight.png",
+      "showInMobile": true
+    },
+    {
+      "id": 7,
+      "name": "Sololearn Light",
+      "image": "/assets/sololearnLight.png",
+      "showInMobile": true
+    },
+    {
+      "id": 8,
+      "name": "Sololearn Light",
+      "image": "/assets/sololearnLight.png",
+      "showInMobile": true
+    },
+    {
+      "id": 9,
+      "name": "Sololearn Light",
+      "image": "/assets/sololearnLight.png",
+      "showInMobile": true
+    },
+    {
+      "id": 10,
+      "name": "Sololearn Light",
+      "image": "/assets/sololearnLight.png",
+      "showInMobile": true
+    },
+    {
+      "id": 11,
+      "name": "Sololearn Light",
+      "image": "/assets/sololearnLight.png",
+      "showInMobile": true
+    },
+    {
+      "id": 12,
+      "name": "Sololearn Light",
+      "image": "/assets/sololearnLight.png",
+      "showInMobile": true
+    },
+    {
+      "name": "New Banner",
+      "image": "/assets/newBanner.png",
+      "showInMobile": true,
+      "id": 13
+    },
+    {
+      "name": "New Banner",
+      "image": "/assets/newBanner.png",
+      "showInMobile": true,
+      "id": 14
+    },
+    {
+      "name": "New Banner",
+      "image": "/assets/newBanner.png",
+      "showInMobile": true,
+      "id": 15
+    },
+    {
+      "name": "New Banner",
+      "image": "/assets/newBanner.png",
+      "showInMobile": true,
+      "id": 16
+    },
+    {
+      "appName": "S",
+      "image": "/assets/newBanner.png",
+      "googlePlayUrl": "AS",
+      "showInMobile": false,
+      "id": 17
+    },
+    {
+      "appName": "s",
+      "googlePlayUrl": "sa",
+      "showInMobile": false,
+      "id": 18
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 19
+    },
+    {
+      "appName": "s",
+      "googlePlayUrl": "sa",
+      "showInMobile": false,
+      "id": 20
+    },
+    {
+      "appName": "nameee",
+      "googlePlayUrl": "name.com",
+      "showInMobile": false,
+      "id": 21
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 22
+    },
+    {
+      "appName": "nameee",
+      "googlePlayUrl": "name.com",
+      "showInMobile": false,
+      "id": 23
+    },
+    {
+      "appName": "as",
+      "googlePlayUrl": "as",
+      "showInMobile": false,
+      "id": 24
+    },
+    {
+      "appName": "aaaaaaaaaaaaaaa",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 25
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 26
+    },
+    {
+      "appName": "aaaaaaaaaaaaaaa",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 27
+    },
+    {
+      "appName": "aaaaaaaaaaaaaaa",
+      "googlePlayUrl": "asd",
+      "showInMobile": false,
+      "id": 28
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 29
+    },
+    {
+      "appName": "aaaaaaaaaaaaaaa",
+      "googlePlayUrl": "asd",
+      "showInMobile": false,
+      "id": 30
+    },
+    {
+      "appName": "aaaaaaaaaaaaaaa",
+      "googlePlayUrl": "asd",
+      "showInMobile": false,
+      "id": 31
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 32
+    },
+    {
+      "appName": "aaaaaaaaaaaaaaa",
+      "googlePlayUrl": "asd",
+      "showInMobile": false,
+      "id": 33
+    },
+    {
+      "appName": "KJakldj",
+      "googlePlayUrl": "aslkdjasd",
+      "showInMobile": false,
+      "id": 34
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 35
+    },
+    {
+      "appName": "KJakldj",
+      "googlePlayUrl": "aslkdjasd",
+      "showInMobile": false,
+      "id": 36
+    },
+    {
+      "appName": "KJakldj",
+      "googlePlayUrl": "aslkdjasd",
+      "showInMobile": false,
+      "id": 37
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 38
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 39
+    },
+    {
+      "appName": "SSASsfdfs",
+      "googlePlayUrl": "SaS",
+      "showInMobile": false,
+      "id": 40
+    },
+    {
+      "appName": "SSASsfdfs",
+      "googlePlayUrl": "SaS",
+      "showInMobile": false,
+      "id": 41
+    },
+    {
+      "appName": "aS",
+      "googlePlayUrl": "S",
+      "showInMobile": false,
+      "id": 42
+    },
+    {
+      "appName": "aS",
+      "googlePlayUrl": "S",
+      "showInMobile": false,
+      "id": 43
+    },
+    {
+      "appName": "aS",
+      "googlePlayUrl": "S",
+      "showInMobile": false,
+      "id": 44
+    },
+    {
+      "appName": "aS",
+      "googlePlayUrl": "S",
+      "showInMobile": false,
+      "id": 45
+    },
+    {
+      "appName": "ZX",
+      "googlePlayUrl": "zx",
+      "showInMobile": false,
+      "id": 46
+    },
+    {
+      "appName": "ZX",
+      "googlePlayUrl": "zx",
+      "showInMobile": false,
+      "id": 47
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 48
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 49
+    },
+    {
+      "appName": "ZX",
+      "googlePlayUrl": "zx",
+      "showInMobile": false,
+      "id": 50
+    },
+    {
+      "appName": "ZX",
+      "googlePlayUrl": "zx",
+      "showInMobile": false,
+      "id": 51
+    },
+    {
+      "appName": "ZX",
+      "googlePlayUrl": "zx",
+      "showInMobile": false,
+      "id": 52
+    },
+    {
+      "appName": "ZX",
+      "googlePlayUrl": "zx",
+      "showInMobile": false,
+      "id": 53
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 54
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 55
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 56
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 57
+    },
+    {
+      "appName": false,
+      "googlePlayUrl": false,
+      "showInMobile": false,
+      "id": 58
+    },
+    {
+      "appName": false,
+      "googlePlayUrl": false,
+      "showInMobile": false,
+      "id": 59
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 60
+    },
+    {
+      "appName": "",
+      "googlePlayUrl": "",
+      "showInMobile": false,
+      "id": 61
+    },
+    {
+      "appName": false,
+      "googlePlayUrl": false,
+      "showInMobile": false,
+      "id": 62
+    },
+    {
+      "appName": false,
+      "googlePlayUrl": false,
+      "showInMobile": false,
+      "id": 63
+    }
   ]
 }

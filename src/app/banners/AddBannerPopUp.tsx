@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -8,10 +8,60 @@ import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import { Box } from "@mui/system";
-import categoriesAray from "@/Data/categories";
 import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 
 const AddBannerPopUp = ({ isOpen, onClose }: any) => {
+  const [bannerData, setBannerData] = useState({
+    appName: "",
+    googlePlayUrl: "",
+    showInMobile: false,
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setBannerData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+  const addBanner = async () => {
+    onClose();
+    try {
+      const response = await fetch("http://localhost:3002/banners", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bannerData),
+      });
+
+      if (response.ok) {
+        console.log("response is ok");
+      } else {
+        console.log("Adding failed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleAddBanner = async () => {
+    onClose();
+    try {
+      const response = await fetch("http://localhost:3002/banners", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bannerData),
+      });
+      console.log(response);
+      if (response.ok) {
+        console.log("response is ok");
+      } else {
+        console.log("adding failed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    addBanner();
+  };
   return (
     <Dialog open={isOpen} onClose={onClose}>
       <Box
@@ -37,6 +87,8 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
           fullWidth
           margin="normal"
           required
+          onChange={handleInputChange}
+          value={bannerData.appName}
         />
 
         <TextField
@@ -44,6 +96,8 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
           name="googlePlayUrl"
           fullWidth
           margin="normal"
+          onChange={handleInputChange}
+          value={bannerData.googlePlayUrl}
         />
 
         <Button
@@ -70,7 +124,7 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
         <Button variant="outlined" onClick={onClose} color="primary">
           Cancel
         </Button>
-        <Button variant="outlined" onClick={onClose} color="primary">
+        <Button variant="outlined" onClick={handleAddBanner} color="primary">
           Add
         </Button>
       </DialogActions>

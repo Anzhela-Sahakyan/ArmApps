@@ -19,12 +19,14 @@ interface ApplicationProps {
   apps: App[];
   page: number;
   rowsPerPage: number;
+  onDelete: (appId: number | string) => void;
 }
 
 export default function BannerPaginationFilter({
   apps,
   page,
   rowsPerPage,
+  onDelete,
 }: ApplicationProps) {
   const startIndex = page * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
@@ -32,10 +34,13 @@ export default function BannerPaginationFilter({
   const displayedApps = apps.slice(startIndex, endIndex);
 
   const [showInMobile, setShowInMobile] = useState(false);
+
   const handleCheckboxChange = () => {
     setShowInMobile((prev) => !prev);
   };
-
+  const handleDelete = (appId: number | string) => {
+    onDelete(appId);
+  };
   return (
     <TableBody>
       {displayedApps.map((app) => (
@@ -57,7 +62,10 @@ export default function BannerPaginationFilter({
             </IconButton>
           </TableCell>
           <TableCell>
-            <IconButton aria-label="delete">
+            <IconButton
+              aria-label="delete"
+              onClick={() => handleDelete(app.id)}
+            >
               <Avatar
                 alt="delete"
                 src="/assets/delete.png"
