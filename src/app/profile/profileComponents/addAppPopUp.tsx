@@ -34,7 +34,7 @@ const AddAppPopUp = ({ isOpen, onClose }: any) => {
       <DialogContent>
         <TextField
           label="App Name"
-          name="appName"
+          name="name"
           fullWidth
           margin="normal"
           required

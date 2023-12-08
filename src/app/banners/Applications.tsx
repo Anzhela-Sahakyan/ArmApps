@@ -23,14 +23,16 @@ interface ApplicationProps {
   onDelete: (appId: string | number) => Promise<void>;
 }
 
-export default function Application({
+export default function Applications({
   apps,
   page,
   rowsPerPage,
+  onDelete,
 }: ApplicationProps) {
   const [appData, setAppData] = useState<App[]>(apps);
   const handleDelete = (appId: number | string) => {
     setAppData((prevApps) => prevApps.filter((app) => app.id === appId));
+    onDelete(appId);
   };
 
   return (

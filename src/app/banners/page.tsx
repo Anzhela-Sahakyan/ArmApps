@@ -29,7 +29,7 @@ export default function BannersPage() {
       });
       setBannerApps((prevApps) =>
         prevApps.filter((app) => {
-          app.id !== appId;
+          return app.id !== appId;
         })
       );
       console.log(bannerApps);

@@ -12,7 +12,7 @@ import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 
 const AddBannerPopUp = ({ isOpen, onClose }: any) => {
   const [bannerData, setBannerData] = useState({
-    appName: "",
+    name: "",
     googlePlayUrl: "",
     showInMobile: false,
   });
@@ -83,12 +83,12 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
       <DialogContent>
         <TextField
           label="Banner Name"
-          name="appName"
+          name="name"
           fullWidth
           margin="normal"
           required
           onChange={handleInputChange}
-          value={bannerData.appName}
+          value={bannerData.name}
         />
 
         <TextField
