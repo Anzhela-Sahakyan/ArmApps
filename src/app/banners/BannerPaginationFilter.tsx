@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-interface App {
+interface Banner {
   id: number | string;
   name: string;
   image: string;
@@ -16,14 +16,14 @@ interface App {
 }
 
 interface ApplicationProps {
-  apps: App[];
+  banners: Banner[];
   page: number;
   rowsPerPage: number;
-  onDelete: (appId: number | string) => void;
+  onDelete: (bannerId: number | string) => void;
 }
 
 export default function BannerPaginationFilter({
-  apps,
+  banners,
   page,
   rowsPerPage,
   onDelete,
@@ -31,25 +31,37 @@ export default function BannerPaginationFilter({
   const startIndex = page * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
 
-  const displayedApps = apps.slice(startIndex, endIndex);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState<
+    Record<string, boolean>
+  >({});
+
+  const displayedApps = banners.slice(startIndex, endIndex);
 
   const [showInMobile, setShowInMobile] = useState(false);
 
-  const handleCheckboxChange = () => {
-    setShowInMobile((prev) => !prev);
+  const handleCheckboxChange = (bannerId: string | number) => {
+    setSelectedCheckboxes((prev) => ({
+      ...prev,
+      [bannerId]: !prev[bannerId],
+    }));
   };
   const handleDelete = (appId: number | string) => {
     onDelete(appId);
   };
   return (
     <TableBody>
-      {displayedApps.map((app, index) => (
-        <TableRow key={app.id}>
+      {displayedApps.map((banner, index) => (
+        <TableRow key={banner.id}>
           <TableCell>{startIndex + index + 1}</TableCell>
-          <TableCell>{<Avatar alt={app.name} src={app.image} />}</TableCell>
-          <TableCell>{app.name}</TableCell>
           <TableCell>
-            <Checkbox checked={showInMobile} onChange={handleCheckboxChange} />
+            {<Avatar alt={banner.name} src={banner.image} />}
+          </TableCell>
+          <TableCell>{banner.name}</TableCell>
+          <TableCell>
+            <Checkbox
+              checked={selectedCheckboxes[banner.id]}
+              onChange={() => handleCheckboxChange(banner.id)}
+            />
           </TableCell>
 
           <TableCell>
@@ -64,7 +76,7 @@ export default function BannerPaginationFilter({
           <TableCell>
             <IconButton
               aria-label="delete"
-              onClick={() => handleDelete(app.id)}
+              onClick={() => handleDelete(banner.id)}
             >
               <Avatar
                 alt="delete"

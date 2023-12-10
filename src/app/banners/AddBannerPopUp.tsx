@@ -12,9 +12,11 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 
 const AddBannerPopUp = ({ isOpen, onClose }: any) => {
   const [bannerData, setBannerData] = useState({
+    id: "",
     name: "",
     googlePlayUrl: "",
     showInMobile: false,
+    image: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +37,6 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
       });
       console.log(response);
       if (response.ok) {
-        const newBannersList = await response.json();
         console.log("response is ok");
       } else {
         console.log("adding failed");

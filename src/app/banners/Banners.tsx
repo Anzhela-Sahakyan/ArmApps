@@ -40,7 +40,7 @@ export default function Banners({
           </TableRow>
         </TableHead>
         <BannerPaginationFilter
-          apps={apps}
+          banners={apps}
           page={page}
           rowsPerPage={rowsPerPage}
           onDelete={onDelete}
