@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import { Box } from "@mui/system";
-import { Checkbox, FormControlLabel, Typography } from "@mui/material";
+import { Checkbox, FormControlLabel } from "@mui/material";
 
 const AddBannerPopUp = ({ isOpen, onClose }: any) => {
   const [bannerData, setBannerData] = useState({
@@ -24,24 +24,6 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-  const addBanner = async () => {
-    onClose();
-    try {
-      const response = await fetch("http://localhost:3002/banners", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bannerData),
-      });
-
-      if (response.ok) {
-        console.log("response is ok");
-      } else {
-        console.log("Adding failed");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleAddBanner = async () => {
     onClose();
@@ -53,6 +35,7 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
       });
       console.log(response);
       if (response.ok) {
+        const newBannersList = await response.json();
         console.log("response is ok");
       } else {
         console.log("adding failed");
@@ -60,7 +43,6 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
     } catch (error) {
       console.log(error);
     }
-    addBanner();
   };
   return (
     <Dialog open={isOpen} onClose={onClose}>

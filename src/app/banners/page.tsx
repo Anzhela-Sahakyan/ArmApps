@@ -15,6 +15,7 @@ export default function BannersPage() {
   const [isAddBannerOpen, setIsAddBannerOpen] = useState(false);
   const [bannerApps, setBannerApps] = useState<Banner[]>([]);
   const [filteredBanners, setFilteredBanners] = useState<Banner[]>([]);
+  const [isNewBannerAdded, setIsNewBannerAdded] = useState(false);
 
   const handleSearch = (query: any) => {
     const filtered = bannerApps.filter((banner) =>
@@ -28,6 +29,7 @@ export default function BannersPage() {
   };
   const handleCloseAddApp = () => {
     setIsAddBannerOpen(false);
+    setIsNewBannerAdded(true);
   };
   const handleDeleteApp = async (appId: number | string) => {
     try {
@@ -50,6 +52,7 @@ export default function BannersPage() {
         const data = await response.json();
         setBannerApps(data);
         setFilteredBanners(data);
+        console.log(filteredBanners, "filtered banners");
         setIsAddBannerOpen(false);
       } catch (error) {
         console.log(error, "fetching data from db.json has failed");
@@ -57,7 +60,7 @@ export default function BannersPage() {
     };
 
     receivedData();
-  }, []);
+  }, [isNewBannerAdded]);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,

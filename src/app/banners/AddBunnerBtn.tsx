@@ -12,11 +12,9 @@ export default function AddBunnerBtn({ onOpenAddAppDialog }: any) {
   });
   const openDialog = () => {
     onOpenAddAppDialog();
-    setIsDialogOpen(true);
   };
 
   const closeDialog = () => {
-    onOpenAddAppDialog();
     setIsDialogOpen(false);
   };
 
