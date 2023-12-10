@@ -2,8 +2,7 @@
 
 import { Box } from "@mui/system";
 import Header from "../profile/profileComponents/header";
-import Applications, { App } from "./Applications";
-// import bannerApps from "@/Data/bannerApps";
+import Banners, { Banner } from "./Banners";
 import { useEffect, useState } from "react";
 import BannerSearchfield from "../profile/profileComponents/searchfield";
 import AddBunnerBtn from "./AddBunnerBtn";
@@ -14,7 +13,15 @@ export default function BannersPage() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [isAddBannerOpen, setIsAddBannerOpen] = useState(false);
-  const [bannerApps, setBannerApps] = useState<App[]>([]);
+  const [bannerApps, setBannerApps] = useState<Banner[]>([]);
+  const [filteredBanners, setFilteredBanners] = useState<Banner[]>([]);
+
+  const handleSearch = (query: any) => {
+    const filtered = bannerApps.filter((banner) =>
+      banner.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredBanners(filtered);
+  };
 
   const handleOpenAddApp = () => {
     setIsAddBannerOpen(true);
@@ -27,12 +34,11 @@ export default function BannersPage() {
       await fetch(`http://localhost:3002/banners/${appId}`, {
         method: "DELETE",
       });
-      setBannerApps((prevApps) =>
+      setFilteredBanners((prevApps) =>
         prevApps.filter((app) => {
           return app.id !== appId;
         })
       );
-      console.log(bannerApps);
     } catch (error) {
       console.log(error);
     }
@@ -43,6 +49,7 @@ export default function BannersPage() {
         const response = await fetch("http://localhost:3002/banners");
         const data = await response.json();
         setBannerApps(data);
+        setFilteredBanners(data);
         setIsAddBannerOpen(false);
       } catch (error) {
         console.log(error, "fetching data from db.json has failed");
@@ -76,17 +83,17 @@ export default function BannersPage() {
           justifyContent: "space-between",
         }}
       >
-        <BannerSearchfield />
+        <BannerSearchfield onSearch={handleSearch} />
         <AddBunnerBtn onOpenAddAppDialog={handleOpenAddApp} />
       </Box>
-      <Applications
-        apps={bannerApps}
+      <Banners
+        apps={filteredBanners}
         page={page}
         rowsPerPage={rowsPerPage}
         onDelete={handleDeleteApp}
       />
       <BannerPagination
-        totalItems={bannerApps.length}
+        totalItems={filteredBanners.length}
         page={page}
         rowsPerPage={rowsPerPage}
         handleChangePage={handleChangePage}

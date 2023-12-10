@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 
-export default function Searchfield() {
+export default function BannerSearchfield() {
   return (
     <TextField
       id="outlined-basic"

@@ -9,7 +9,7 @@ import {
 import BannerPaginationFilter from "./BannerPaginationFilter";
 import { useState } from "react";
 
-export interface App {
+export interface Banner {
   id: number | string;
   name: string;
   image: string;
@@ -17,19 +17,19 @@ export interface App {
 }
 
 interface ApplicationProps {
-  apps: App[];
+  apps: Banner[];
   page: number;
   rowsPerPage: number;
   onDelete: (appId: string | number) => Promise<void>;
 }
 
-export default function Applications({
+export default function Banners({
   apps,
   page,
   rowsPerPage,
   onDelete,
 }: ApplicationProps) {
-  const [appData, setAppData] = useState<App[]>(apps);
+  const [appData, setAppData] = useState<Banner[]>(apps);
   const handleDelete = (appId: number | string) => {
     setAppData((prevApps) => prevApps.filter((app) => app.id === appId));
     onDelete(appId);
@@ -50,7 +50,7 @@ export default function Applications({
           apps={apps}
           page={page}
           rowsPerPage={rowsPerPage}
-          onDelete={handleDelete}
+          onDelete={onDelete}
         />
       </Table>
     </TableContainer>
