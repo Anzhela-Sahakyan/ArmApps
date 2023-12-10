@@ -7,7 +7,6 @@ import {
   Paper,
 } from "@mui/material";
 import BannerPaginationFilter from "./BannerPaginationFilter";
-import { useState } from "react";
 
 export interface Banner {
   id: number | string;
@@ -29,12 +28,6 @@ export default function Banners({
   rowsPerPage,
   onDelete,
 }: ApplicationProps) {
-  const [appData, setAppData] = useState<Banner[]>(apps);
-  const handleDelete = (appId: number | string) => {
-    setAppData((prevApps) => prevApps.filter((app) => app.id === appId));
-    onDelete(appId);
-  };
-
   return (
     <TableContainer component={Paper}>
       <Table>

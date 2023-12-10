@@ -43,9 +43,9 @@ export default function BannerPaginationFilter({
   };
   return (
     <TableBody>
-      {displayedApps.map((app) => (
+      {displayedApps.map((app, index) => (
         <TableRow key={app.id}>
-          <TableCell>{app.id}</TableCell>
+          <TableCell>{startIndex + index + 1}</TableCell>
           <TableCell>{<Avatar alt={app.name} src={app.image} />}</TableCell>
           <TableCell>{app.name}</TableCell>
           <TableCell>
