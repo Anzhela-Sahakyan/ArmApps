@@ -10,13 +10,21 @@ import IconButton from "@mui/material/IconButton";
 import { Box } from "@mui/system";
 import { Checkbox, FormControlLabel } from "@mui/material";
 
+interface BannerData {
+  id: string;
+  name: string;
+  googlePlayUrl: string;
+  showInMobile: boolean;
+  image: File | null;
+}
+
 const AddBannerPopUp = ({ isOpen, onClose }: any) => {
-  const [bannerData, setBannerData] = useState({
+  const [bannerData, setBannerData] = useState<BannerData>({
     id: "",
     name: "",
     googlePlayUrl: "",
     showInMobile: false,
-    image: "",
+    image: null,
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +38,7 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
   const handleAddBanner = async () => {
     onClose();
     try {
+      console.log("sending request with data:", bannerData);
       const response = await fetch("http://localhost:3002/banners", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -45,6 +54,19 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
       console.log(error);
     }
   };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const selectedFile = e.target.files[0];
+      console.log("selected file::::", selectedFile);
+      setBannerData((prevData) => ({
+        ...prevData,
+        image: selectedFile,
+      }));
+      console.log("updated Banner data::::0", bannerData);
+    }
+  };
+
   return (
     <Dialog open={isOpen} onClose={onClose}>
       <Box
@@ -90,7 +112,7 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
           sx={{ marginTop: "15px" }}
         >
           Upload Banner Image
-          <input type="file" hidden />
+          <input type="file" hidden onChange={handleImageUpload} />
         </Button>
         <Box
           sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}

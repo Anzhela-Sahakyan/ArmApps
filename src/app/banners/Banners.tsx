@@ -7,15 +7,17 @@ import {
   Paper,
 } from "@mui/material";
 import BannerPaginationFilter from "./BannerPaginationFilter";
+import { useState } from "react";
 
 export interface Banner {
   id: number | string;
   name: string;
-  image: string;
+  image: string | File;
   showInMobile: boolean;
+  link: string;
 }
 
-interface ApplicationProps {
+interface BannerProbs {
   apps: Banner[];
   page: number;
   rowsPerPage: number;
@@ -27,7 +29,35 @@ export default function Banners({
   page,
   rowsPerPage,
   onDelete,
-}: ApplicationProps) {
+}: BannerProbs) {
+  const [editedBanner, setEditedBanner] = useState<Banner | null>(null);
+
+  const saveEditedBanner = async (editedBanner: Banner) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3002/banners/${editedBanner.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(editedBanner),
+        }
+      );
+      const data = await response.json();
+      console.log("Banner edited", data);
+    } catch (error) {
+      console.log(error, "Couldn't update banner");
+    }
+  };
+
+  const handleEdit = (editBanner: Banner) => {
+    console.log("Edited Banner:", editBanner);
+
+    saveEditedBanner(editBanner);
+    setEditedBanner(null);
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -44,6 +74,7 @@ export default function Banners({
           page={page}
           rowsPerPage={rowsPerPage}
           onDelete={onDelete}
+          onEdit={handleEdit}
         />
       </Table>
     </TableContainer>
