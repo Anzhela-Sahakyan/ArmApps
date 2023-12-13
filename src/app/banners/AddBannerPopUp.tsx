@@ -9,6 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import { Box } from "@mui/system";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import axios from "axios";
 
 interface BannerData {
   id: string;
@@ -39,17 +40,19 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
     onClose();
     try {
       console.log("sending request with data:", bannerData);
-      const response = await fetch("http://localhost:3002/banners", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bannerData),
-      });
+      const response = await axios.post(
+        "http://localhost:3002/banners",
+        bannerData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       console.log(response);
-      if (response.ok) {
-        console.log("response is ok");
-      } else {
-        console.log("adding failed");
-      }
+      //   if (response) {
+      //     console.log("response is ok");
+      //   } else {
+      //     console.log("adding failed");
+      //   }
     } catch (error) {
       console.log(error);
     }

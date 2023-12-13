@@ -26,7 +26,7 @@ export async function POST(request: Request, response: Response) {
         data: newBanner,
       });
 
-      db.banners.push(newBanner);
+      // db.banners.push(newBanner);
     } else {
       return NextResponse.json({ error: "Banner not found" }, { status: 404 });
     }

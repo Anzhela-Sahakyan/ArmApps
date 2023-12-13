@@ -29,21 +29,21 @@
     },
     {
       "id": 3,
-      "name": "Sololearn Dark",
+      "name": "Sololearn ",
       "image": "/assets/sololearnLight.png",
       "showInMobile": true,
       "link": "solo.org"
     },
     {
       "id": 4,
-      "name": "Sololearn Light",
+      "name": "Sololearn ",
       "image": "/assets/sololearnLight.png",
       "showInMobile": true,
       "link": "light.org"
     },
     {
       "id": 5,
-      "name": "Sololearn Light",
+      "name": "Sololearn",
       "image": "/assets/sololearnLight.png",
       "showInMobile": true
     },
@@ -82,17 +82,44 @@
     },
     {
       "id": 13,
-      "name": "AS",
-      "googlePlayUrl": "S",
+      "name": "Name",
+      "googlePlayUrl": "url.com",
+      "showInMobile": false,
+      "image": null
+    },
+    {
+      "id": 14,
+      "name": "nn",
+      "googlePlayUrl": "mm",
+      "showInMobile": false,
+      "image": null
+    },
+    {
+      "id": 15,
+      "name": "hn",
+      "googlePlayUrl": "jk",
+      "showInMobile": false,
+      "image": null
+    },
+    {
+      "id": 16,
+      "name": "sad",
+      "googlePlayUrl": "asd",
       "showInMobile": false,
       "image": {}
     },
     {
-      "id": 21,
-      "name": "new banner",
-      "googlePlayUrl": "banner.com",
+      "id": 17
+    },
+    {
+      "id": 18
+    },
+    {
+      "id": 19,
+      "name": "asd",
+      "googlePlayUrl": "asd",
       "showInMobile": false,
-      "image": null
+      "image": {}
     }
   ]
 }

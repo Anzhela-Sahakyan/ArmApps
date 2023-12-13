@@ -90,10 +90,11 @@ export default function BannersPage() {
         <AddBunnerBtn onOpenAddAppDialog={handleOpenAddApp} />
       </Box>
       <Banners
-        apps={filteredBanners}
+        banners={filteredBanners}
         page={page}
         rowsPerPage={rowsPerPage}
         onDelete={handleDeleteApp}
+        onBannersChange={setFilteredBanners}
       />
       <BannerPagination
         totalItems={filteredBanners.length}
