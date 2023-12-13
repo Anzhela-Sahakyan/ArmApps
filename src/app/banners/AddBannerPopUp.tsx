@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import { Box } from "@mui/system";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import axios from "axios";
+import { fileToBase64 } from "@/utils/file.util";
 
 interface BannerData {
   id: string;
@@ -37,14 +38,19 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
   };
 
   const handleAddBanner = async () => {
+    debugger;
     onClose();
     try {
       console.log("sending request with data:", bannerData);
+
       const response = await axios.post(
         "http://localhost:3002/banners",
-        bannerData,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          ...bannerData,
+          image: bannerData.image ? await fileToBase64(bannerData.image) : null,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
         }
       );
       console.log(response);

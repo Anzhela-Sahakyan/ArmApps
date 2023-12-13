@@ -8,14 +8,8 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import EditBannerModal from "./editBannerModal";
-
-export interface Banner {
-  id: number | string;
-  name: string;
-  image: string | File;
-  showInMobile: boolean;
-  link: string;
-}
+import BannerImage from "./BannerImage";
+import { Banner } from "./Banners";
 
 interface BannerPaginationFilterProps {
   banners: Banner[];
@@ -72,13 +66,7 @@ export default function BannerPaginationFilter({
         {displayedApps.map((banner, index) => (
           <TableRow key={banner.id}>
             <TableCell>{startIndex + index + 1}</TableCell>
-            <TableCell>
-              {typeof banner.image === "string" ? (
-                <Avatar alt={banner.name} src={banner.image} />
-              ) : (
-                <Avatar alt={banner.name} src="" />
-              )}
-            </TableCell>
+            <BannerImage banner={banner} />
             <TableCell>{banner.name}</TableCell>
             <TableCell>
               <Checkbox
