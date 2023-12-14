@@ -62,10 +62,7 @@ export default function BannersPage() {
     receivedData();
   }, [isNewBannerAdded]);
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
+  const handleChangePage = (newPage: number) => {
     setPage(newPage);
   };
 

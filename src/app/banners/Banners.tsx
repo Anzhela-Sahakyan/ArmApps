@@ -17,14 +17,16 @@ export interface Banner {
   link: string;
 }
 
-type onBannersChangeProps = (props: Banner[]) => Banner[] | Banner[];
+type onBannersChangeProps = (
+  callback: (prev: Banner[]) => Banner[] | Banner[]
+) => void;
 
 interface BannerProbs {
   banners: Banner[];
   page: number;
   rowsPerPage: number;
   onDelete: (appId: string | number) => Promise<void>;
-  onBannersChange: (params: onBannersChangeProps) => void;
+  onBannersChange: onBannersChangeProps;
 }
 
 export default function Banners({
@@ -50,6 +52,9 @@ export default function Banners({
       );
       console.log("editedbanner:::::", editedBanner);
       const data = await response.json();
+      const updatedBannrs = banners.map((banner) =>
+        banner.id === editedBanner.id ? editedBanner : banner
+      );
       onBannersChange((prev: Banner[]) => {
         return prev.map((banner) => {
           if (banner.id === editedBanner.id) {
@@ -69,7 +74,6 @@ export default function Banners({
     console.log("Edited Banner:", editBanner);
 
     saveEditedBanner(editBanner);
-    // setEditedBanner(null);
     setIsBunnerEdited(true);
   };
   useEffect(() => {
@@ -94,6 +98,9 @@ export default function Banners({
           rowsPerPage={rowsPerPage}
           onDelete={onDelete}
           onEdit={handleEdit}
+          onBannersChange={(updatedBanners) =>
+            onBannersChange(() => updatedBanners)
+          }
         />
       </Table>
     </TableContainer>

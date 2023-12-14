@@ -4,10 +4,7 @@ interface BannerPaginationProps {
   totalItems: number;
   page: number;
   rowsPerPage: number;
-  handleChangePage: (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => void;
+  handleChangePage: (newPage: number) => void;
   handleChangeRowsPerPage: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -25,7 +22,7 @@ const BannerPagination: React.FC<BannerPaginationProps> = ({
       component="div"
       count={totalItems}
       page={page}
-      onPageChange={handleChangePage}
+      onPageChange={(_, page) => handleChangePage(page)}
       rowsPerPage={rowsPerPage}
       rowsPerPageOptions={[5, 10, 50]}
       onRowsPerPageChange={handleChangeRowsPerPage}

@@ -38,7 +38,6 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
   };
 
   const handleAddBanner = async () => {
-    debugger;
     onClose();
     try {
       console.log("sending request with data:", bannerData);

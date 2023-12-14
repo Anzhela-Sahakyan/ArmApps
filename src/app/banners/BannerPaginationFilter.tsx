@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import EditBannerModal from "./editBannerModal";
 import BannerImage from "./BannerImage";
 import { Banner } from "./Banners";
+import axios from "axios";
 
 interface BannerPaginationFilterProps {
   banners: Banner[];
@@ -17,6 +18,7 @@ interface BannerPaginationFilterProps {
   rowsPerPage: number;
   onDelete: (bannerId: number | string) => void;
   onEdit: (editBanner: Banner) => void;
+  onBannersChange: (updatedBanners: Banner[]) => void;
 }
 
 export default function BannerPaginationFilter({
@@ -25,24 +27,36 @@ export default function BannerPaginationFilter({
   rowsPerPage,
   onDelete,
   onEdit,
+  onBannersChange,
 }: BannerPaginationFilterProps) {
   const startIndex = page * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
 
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState<
-    Record<string, boolean>
-  >({});
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [selectedBanner, setSelectedBanner] = useState<Banner | null>(null);
   const displayedApps = banners.slice(startIndex, endIndex);
 
-  const [showInMobile, setShowInMobile] = useState(false);
+  const handleCheckboxChange = async (
+    bannerId: string | number,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    try {
+      const updatedBanners = banners.map((banner) =>
+        banner.id === bannerId
+          ? {
+              ...banner,
+              showInMobile: event.target.checked,
+            }
+          : banner
+      );
+      onBannersChange(updatedBanners);
 
-  const handleCheckboxChange = async (bannerId: string | number) => {
-    setSelectedCheckboxes((prev) => ({
-      ...prev,
-      [bannerId]: !prev[bannerId],
-    }));
+      await axios.patch(`http://localhost:3002/banners/${bannerId}`, {
+        showInMobile: event.target.checked,
+      });
+    } catch (error) {
+      console.log("error updating banner", error);
+    }
   };
   const handleEditClick = (banner: Banner) => {
     setSelectedBanner(banner);
@@ -70,8 +84,8 @@ export default function BannerPaginationFilter({
             <TableCell>{banner.name}</TableCell>
             <TableCell>
               <Checkbox
-                checked={selectedCheckboxes[banner.id]}
-                onChange={() => handleCheckboxChange(banner.id)}
+                checked={banner.showInMobile}
+                onChange={(event) => handleCheckboxChange(banner.id, event)}
               />
             </TableCell>
 
