@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import {
-  Backdrop,
   Button,
   Checkbox,
   Dialog,
@@ -39,17 +38,17 @@ export default function EditBannerModal({
 
   const handleSave = async () => {
     onClose();
-    onSave(editedBanner);
+
     try {
       console.log("sending request with data::::::::", editedBanner);
 
-      const response = await axios.post(
+      const response = await axios.put(
         "http://localhost:3002/banners",
         {
           ...editedBanner,
           image: editedBanner.image
-            ? await fileToBase64(editedBanner.image as Blob)
-            : editedBanner.image,
+            ? await fileToBase64(editedBanner.image)
+            : await fileToBase64(banner.image),
         },
         {
           headers: { "Content-Type": "application/json" },
@@ -65,6 +64,7 @@ export default function EditBannerModal({
     } catch (error) {
       console.log(error);
     }
+    onSave(editedBanner);
   };
 
   const handleImageEdit = (e: React.ChangeEvent<HTMLInputElement>) => {
