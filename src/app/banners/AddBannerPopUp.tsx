@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
-import { Box } from "@mui/system";
+import { Box, color } from "@mui/system";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import axios from "axios";
 import { fileToBase64 } from "@/utils/file.util";
@@ -112,7 +112,11 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
           variant="contained"
           component="label"
           size="small"
-          sx={{ marginTop: "15px" }}
+          sx={(theme) => ({
+            marginTop: "15px",
+            backgroundColor: theme.palette.info.main,
+            color: "primary.main",
+          })}
         >
           Upload Banner Image
           <input type="file" hidden onChange={handleImageUpload} />
@@ -122,14 +126,26 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
         >
           <FormControlLabel
             value="start"
-            control={<Checkbox />}
             label="Show in mobile"
+            control={
+              <Checkbox
+                sx={(theme) => ({
+                  "&.Mui-checked .MuiSvgIcon-root": {
+                    fill: theme.palette.secondary.light,
+                  },
+                })}
+              />
+            }
             labelPlacement="start"
           />
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button variant="outlined" onClick={onClose} color="primary">
+        <Button
+          variant="outlined"
+          onClick={onClose}
+          sx={{ borderColor: "primary.light", color: "primary.dark" }}
+        >
           Cancel
         </Button>
         <Button variant="outlined" onClick={handleAddBanner} color="primary">

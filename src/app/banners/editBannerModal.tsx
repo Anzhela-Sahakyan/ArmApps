@@ -107,6 +107,11 @@ export default function EditBannerModal({
               onChange={(e) =>
                 handleInputChange("showInMobile", e.target.checked)
               }
+              sx={(theme) => ({
+                "&.Mui-checked .MuiSvgIcon-root": {
+                  fill: theme.palette.secondary.light,
+                },
+              })}
             />
           }
           label="Show in Mobile"
@@ -115,14 +120,24 @@ export default function EditBannerModal({
           variant="contained"
           component="label"
           size="small"
-          sx={{ marginTop: "15px" }}
+          sx={(theme) => ({
+            marginTop: "15px",
+            backgroundColor: theme.palette.info.main,
+            color: "primary.main",
+          })}
         >
-          Upload Banner Image
+          Replace Banner Image
           <input type="file" hidden onChange={handleImageEdit} />
         </Button>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button
+          onClick={onClose}
+          variant="outlined"
+          sx={{ borderColor: "primary.light", color: "primary.dark" }}
+        >
+          Cancel
+        </Button>
         <Button onClick={handleSave}>Save</Button>
       </DialogActions>
     </Dialog>

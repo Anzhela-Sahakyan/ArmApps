@@ -2,15 +2,18 @@
 import { createTheme } from "@mui/material";
 
 const theme = createTheme({
-  components: {
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          // border: "1px solid #dde0e3",
-          // borderRadius: "8px",
-          // width: "383px",
-        },
-      },
+  palette: {
+    primary: {
+      main: "#00B9FF",
+      light: "#D0D5DD",
+      dark: "#344054",
+    },
+    secondary: {
+      main: "#ffffff",
+      light: "#F3BA11",
+    },
+    info: {
+      main: "#EFF7FF",
     },
   },
 });

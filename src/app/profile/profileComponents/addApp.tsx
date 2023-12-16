@@ -29,8 +29,6 @@ export default function AddApp({ onOpenAddAppDialog }: any) {
         sx={{
           width: "200px",
           height: "40px",
-          // backgroundColor: "transparent !important",
-          // opacity: "0.5",
         }}
       >
         Add to existing app

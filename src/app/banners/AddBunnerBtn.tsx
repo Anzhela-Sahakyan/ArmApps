@@ -1,5 +1,4 @@
 import { Button } from "@mui/material";
-import styles from "./addBunnerBtn.module.css";
 import { useState } from "react";
 import AddBannerPopUp from "./AddBannerPopUp";
 
@@ -37,8 +36,13 @@ export default function AddBunnerBtn({ onOpenAddAppDialog }: any) {
     <>
       <Button
         variant="contained"
-        className={styles.btnAddNew}
-        sx={{ width: "140px", height: "40px" }}
+        // className={styles.btnAddNew}
+        sx={{
+          width: "140px",
+          height: "40px",
+          color: "secondary.main",
+          backgroundColor: "primary.main",
+        }}
         onClick={openDialog}
       >
         Add banner
