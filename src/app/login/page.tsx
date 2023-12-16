@@ -51,14 +51,11 @@ export default function LoginPage() {
           rememberMe,
         }
       );
-      console.log("response::::::::", response);
+
       if (response.status === 200) {
         setTimeout(() => router.push("/profile"), 1000);
-
-        console.log("status is  200");
       } else {
         setErrorMessage(response.data.error);
-        console.log("login failed", errorMessage);
       }
     } catch (error: any) {
       console.error("error:::::", error);

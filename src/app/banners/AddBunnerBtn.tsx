@@ -28,13 +28,9 @@ export default function AddBunnerBtn({ onOpenAddAppDialog }: any) {
       });
 
       if (response.ok) {
-        console.log("response is ok");
       } else {
-        console.log("Adding failed");
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (

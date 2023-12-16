@@ -4,7 +4,7 @@ import db from "../../../../db.json";
 export async function POST(request: Request, response: Response) {
   try {
     const body = await request.json();
-    console.log("body:::", body);
+
     const newBanner: {
       id: number;
       name: string;
@@ -31,7 +31,6 @@ export async function POST(request: Request, response: Response) {
       return NextResponse.json({ error: "Banner not found" }, { status: 404 });
     }
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

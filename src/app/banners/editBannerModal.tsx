@@ -14,21 +14,25 @@ import { Banner } from "./Banners";
 import axios from "axios";
 import { fileToBase64 } from "@/utils/file.util";
 
+type onBannersChangeProps = (
+  callback: (prev: Banner[]) => Banner[] | Banner[]
+) => void;
+
 interface EditBannerModalProps {
   open: boolean;
   onClose: () => void;
   onSave: (editedBanner: Banner) => void;
   banner: Banner;
+  onBannersChange: onBannersChangeProps;
 }
 
 export default function EditBannerModal({
   open,
   onClose,
-  onSave,
+  onBannersChange,
   banner,
 }: EditBannerModalProps) {
   const [editedBanner, setEditedBanner] = useState<Banner>(banner);
-
   const handleInputChange = (
     field: keyof Banner,
     value: number | string | File | boolean
@@ -39,43 +43,46 @@ export default function EditBannerModal({
   const handleSave = async () => {
     onClose();
 
-    try {
-      console.log("sending request with data::::::::", editedBanner);
+    const editedBannerImage = new Blob([editedBanner.image]);
+    const bannerImage = new Blob([banner.image]);
+    const image =
+      editedBanner.image instanceof File
+        ? await fileToBase64(editedBannerImage)
+        : banner.image;
 
+    console.log(editedBanner.image);
+    try {
       const response = await axios.put(
-        "http://localhost:3002/banners",
+        `http://localhost:3002/banners/${banner.id}`,
         {
           ...editedBanner,
-          image: editedBanner.image
-            ? await fileToBase64(editedBanner.image)
-            : await fileToBase64(banner.image),
+          image,
         },
         {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log("editedbanner.image::::::::", editedBanner.image);
-      console.log(response);
-      //   if (response) {
-      //     console.log("response is ok");
-      //   } else {
-      //     console.log("adding failed");
-      //   }
-    } catch (error) {
-      console.log(error);
-    }
-    onSave(editedBanner);
+
+      onBannersChange((prev: any) => {
+        return prev.map((banner: any) => {
+          if (banner.id === editedBanner.id) {
+            return { ...editedBanner, image };
+          }
+          return banner;
+        });
+      });
+    } catch (error) {}
+    // onSave(editedBanner);
   };
 
   const handleImageEdit = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const selectedFile = e.target.files[0];
-      console.log("selected file::::", selectedFile);
+
       setEditedBanner((prevData) => ({
         ...prevData,
         image: selectedFile,
       }));
-      console.log("edited Banner data::::0", editedBanner);
     }
   };
 

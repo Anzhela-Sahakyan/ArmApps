@@ -50,7 +50,7 @@ export default function Banners({
           body: JSON.stringify(editedBanner),
         }
       );
-      console.log("editedbanner:::::", editedBanner);
+
       const data = await response.json();
       const updatedBannrs = banners.map((banner) =>
         banner.id === editedBanner.id ? editedBanner : banner
@@ -63,22 +63,15 @@ export default function Banners({
           return banner;
         });
       });
-
-      console.log("Banner edited", data);
-    } catch (error) {
-      console.log(error, "Couldn't update banner");
-    }
+    } catch (error) {}
   };
 
   const handleEdit = (editBanner: Banner) => {
-    console.log("Edited Banner:", editBanner);
-
     saveEditedBanner(editBanner);
     setIsBunnerEdited(true);
   };
   useEffect(() => {
     if (isBunnerEdited) {
-      console.log("Banner is editedd");
     }
   }, [isBunnerEdited]);
   return (
@@ -101,6 +94,7 @@ export default function Banners({
           onBannersChange={(updatedBanners) =>
             onBannersChange(() => updatedBanners)
           }
+          onUpdateBanners={onBannersChange}
         />
       </Table>
     </TableContainer>

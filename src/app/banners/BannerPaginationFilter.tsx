@@ -12,6 +12,10 @@ import BannerImage from "./BannerImage";
 import { Banner } from "./Banners";
 import axios from "axios";
 
+type onUpdatedBannersProps = (
+  callback: (prev: Banner[]) => Banner[] | Banner[]
+) => void;
+
 interface BannerPaginationFilterProps {
   banners: Banner[];
   page: number;
@@ -19,6 +23,7 @@ interface BannerPaginationFilterProps {
   onDelete: (bannerId: number | string) => void;
   onEdit: (editBanner: Banner) => void;
   onBannersChange: (updatedBanners: Banner[]) => void;
+  onUpdateBanners: onUpdatedBannersProps;
 }
 
 export default function BannerPaginationFilter({
@@ -28,6 +33,7 @@ export default function BannerPaginationFilter({
   onDelete,
   onEdit,
   onBannersChange,
+  onUpdateBanners,
 }: BannerPaginationFilterProps) {
   const startIndex = page * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
@@ -54,9 +60,7 @@ export default function BannerPaginationFilter({
       await axios.patch(`http://localhost:3002/banners/${bannerId}`, {
         showInMobile: event.target.checked,
       });
-    } catch (error) {
-      console.log("error updating banner", error);
-    }
+    } catch (error) {}
   };
   const handleEditClick = (banner: Banner) => {
     setSelectedBanner(banner);
@@ -122,6 +126,7 @@ export default function BannerPaginationFilter({
           onClose={handleEditModalClose}
           onSave={handleEditSave}
           banner={selectedBanner}
+          onBannersChange={onUpdateBanners}
         />
       )}
     </>

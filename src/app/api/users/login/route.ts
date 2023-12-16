@@ -7,7 +7,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 export async function POST(request: Request, response: NextApiResponse) {
   try {
     const requestBody = await request.json();
-    console.log("request body:::", requestBody);
+
     const { email, password, rememberMe } = requestBody;
     const { data: users } = await axios.get("http://localhost:3002/users");
 
@@ -39,7 +39,6 @@ export async function POST(request: Request, response: NextApiResponse) {
 
     return jsonResponse;
   } catch (error: any) {
-    console.log(error, "error:::");
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

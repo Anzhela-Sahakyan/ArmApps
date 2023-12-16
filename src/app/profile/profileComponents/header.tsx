@@ -22,9 +22,7 @@ export default function Header() {
       await axios.get("/api/users/logout");
 
       router.push("/login");
-    } catch (error: any) {
-      console.log(error.message);
-    }
+    } catch (error: any) {}
   };
 
   return (

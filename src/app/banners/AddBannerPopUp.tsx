@@ -40,8 +40,6 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
   const handleAddBanner = async () => {
     onClose();
     try {
-      console.log("sending request with data:", bannerData);
-
       const response = await axios.post(
         "http://localhost:3002/banners",
         {
@@ -52,26 +50,23 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log(response);
+
       //   if (response) {
-      //     console.log("response is ok");
+      //
       //   } else {
-      //     console.log("adding failed");
+      //
       //   }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const selectedFile = e.target.files[0];
-      console.log("selected file::::", selectedFile);
+
       setBannerData((prevData) => ({
         ...prevData,
         image: selectedFile,
       }));
-      console.log("updated Banner data::::0", bannerData);
     }
   };
 

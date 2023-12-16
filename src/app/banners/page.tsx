@@ -41,9 +41,7 @@ export default function BannersPage() {
           return app.id !== appId;
         })
       );
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   useEffect(() => {
     const receivedData = async () => {
@@ -52,11 +50,9 @@ export default function BannersPage() {
         const data = await response.json();
         setBannerApps(data);
         setFilteredBanners(data);
-        console.log(filteredBanners, "filtered banners");
+
         setIsAddBannerOpen(false);
-      } catch (error) {
-        console.log(error, "fetching data from db.json has failed");
-      }
+      } catch (error) {}
     };
 
     receivedData();

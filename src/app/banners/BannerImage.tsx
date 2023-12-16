@@ -7,7 +7,6 @@ interface BannerImageProps {
 }
 
 const BannerImage: FC<BannerImageProps> = ({ banner: { image, name } }) => {
-  console.log(image, "BannerImage");
   return (
     <TableCell>
       <Avatar alt={name} src={image as string} />

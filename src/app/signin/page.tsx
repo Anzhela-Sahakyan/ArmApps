@@ -27,7 +27,6 @@ export default function SignInPage() {
   const onSignin = async () => {
     try {
       if (!isEmailValid && !isPasswordValid) {
-        console.log("invalid email or password");
         return;
       }
 
@@ -41,11 +40,10 @@ export default function SignInPage() {
         body: JSON.stringify(user),
       });
       if (response.ok) {
-        // console.log("signup success", response.data);
+        //
         router.push("/login");
       }
     } catch (error: any) {
-      console.log(error.message, "sign up failed");
     } finally {
       setLoading(false);
     }
