@@ -11,6 +11,7 @@ import EditBannerModal from "./editBannerModal";
 import BannerImage from "./BannerImage";
 import { Banner } from "./Banners";
 import axios from "axios";
+import DeleteIconPopUp from "./DeleteIconPopUp";
 
 type onUpdatedBannersProps = (
   callback: (prev: Banner[]) => Banner[] | Banner[]
@@ -41,6 +42,7 @@ export default function BannerPaginationFilter({
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [selectedBanner, setSelectedBanner] = useState<Banner | null>(null);
   const displayedApps = banners.slice(startIndex, endIndex);
+  const [deleteBannerPopUp, setDeleteBannerPopUp] = useState(false);
 
   const handleCheckboxChange = async (
     bannerId: string | number,
@@ -75,9 +77,23 @@ export default function BannerPaginationFilter({
   const handleEditSave = (editedBanner: Banner) => {
     onEdit(editedBanner);
   };
-  const handleDelete = (appId: number | string) => {
-    onDelete(appId);
+  const openPopUp = (banner: Banner) => {
+    setSelectedBanner(banner);
+    setDeleteBannerPopUp(true);
   };
+  const handleDelete = () => {
+    if (selectedBanner) {
+      onDelete(selectedBanner.id);
+      setDeleteBannerPopUp(false);
+      setSelectedBanner(null);
+    }
+  };
+
+  const handleClose = () => {
+    setDeleteBannerPopUp(false);
+    setSelectedBanner(null);
+  };
+
   return (
     <>
       <TableBody>
@@ -106,10 +122,7 @@ export default function BannerPaginationFilter({
               </IconButton>
             </TableCell>
             <TableCell>
-              <IconButton
-                aria-label="delete"
-                onClick={() => handleDelete(banner.id)}
-              >
+              <IconButton aria-label="delete" onClick={() => openPopUp(banner)}>
                 <Avatar
                   alt="delete"
                   src="/assets/delete.png"
@@ -127,6 +140,13 @@ export default function BannerPaginationFilter({
           onSave={handleEditSave}
           banner={selectedBanner}
           onBannersChange={onUpdateBanners}
+        />
+      )}
+      {deleteBannerPopUp && (
+        <DeleteIconPopUp
+          open={deleteBannerPopUp}
+          handleClose={handleClose}
+          handleDelete={handleDelete}
         />
       )}
     </>
