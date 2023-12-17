@@ -7,6 +7,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { Banner } from "./Banners";
+import theme from "@/theme";
 
 interface DeleteIconPopUp {
   open: boolean;
@@ -33,8 +34,22 @@ export default function DeleteIconPopUp({
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleDelete} autoFocus>
+        <Button
+          variant="outlined"
+          sx={{ color: "primary.dark", borderColor: "primary.light" }}
+          onClick={handleClose}
+        >
+          Cancel
+        </Button>
+        <Button
+          variant="contained"
+          sx={{
+            color: theme.palette.common.white,
+            backgroundColor: "error.main",
+          }}
+          onClick={handleDelete}
+          autoFocus
+        >
           Delete
         </Button>
       </DialogActions>
