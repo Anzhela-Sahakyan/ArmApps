@@ -2,12 +2,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import images from "../../Data/images";
-import { ThemeProvider } from "@mui/system";
-import theme from "@/theme";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import { combineClasses } from "@/utils/style.utils";
 import { useTransition } from "react";
 

@@ -7,10 +7,12 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
-import { Box, color } from "@mui/system";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Box } from "@mui/system";
+import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 import axios from "axios";
 import { fileToBase64 } from "@/utils/file.util";
+import images from "@/Data/images";
+import Image from "next/image";
 
 interface BannerData {
   id: string;
@@ -50,12 +52,6 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
           headers: { "Content-Type": "application/json" },
         }
       );
-
-      //   if (response) {
-      //
-      //   } else {
-      //
-      //   }
     } catch (error) {}
   };
 
@@ -71,12 +67,25 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose}>
+    <Dialog
+      open={isOpen}
+      onClose={onClose}
+      sx={{
+        margin: "auto",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "463px",
+        height: "auto",
+        flexShrink: "0",
+      }}
+    >
       <Box
         sx={{
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          marginTop: "10px",
         }}
       >
         <DialogTitle>Add New Banner</DialogTitle>
@@ -89,18 +98,38 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
         </IconButton>
       </Box>
       <DialogContent>
+        <Typography
+          sx={{
+            fontSize: "16px",
+            fontWeight: "400",
+            fontStyle: "normal",
+            lineHeight: "normal",
+            color: "#191928",
+          }}
+        >
+          Banner Name*
+        </Typography>
         <TextField
-          label="Banner Name"
           name="name"
           fullWidth
           margin="normal"
           required
           onChange={handleInputChange}
           value={bannerData.name}
+          sx={{ marginBottom: "30px" }}
         />
-
+        <Typography
+          sx={{
+            fontSize: "16px",
+            fontWeight: "400",
+            fontStyle: "normal",
+            lineHeight: "normal",
+            color: "#191928",
+          }}
+        >
+          Banner URL
+        </Typography>
         <TextField
-          label="Banner URL"
           name="googlePlayUrl"
           fullWidth
           margin="normal"
@@ -116,13 +145,22 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
             marginTop: "15px",
             backgroundColor: theme.palette.info.main,
             color: "primary.main",
+            width: "100%",
+            height: "40px",
+            gap: "3px",
           })}
         >
+          <Image src={images.uploadIcon} alt="uploadIcon" />
           Upload Banner Image
           <input type="file" hidden onChange={handleImageUpload} />
         </Button>
         <Box
-          sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: "10px",
+          }}
         >
           <FormControlLabel
             value="start"
@@ -140,7 +178,7 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
           />
         </Box>
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={{ margin: "10px" }}>
         <Button
           variant="outlined"
           onClick={onClose}

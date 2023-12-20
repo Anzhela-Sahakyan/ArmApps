@@ -106,6 +106,11 @@ export default function BannerPaginationFilter({
               <Checkbox
                 checked={banner.showInMobile}
                 onChange={(event) => handleCheckboxChange(banner.id, event)}
+                sx={(theme) => ({
+                  "&.Mui-checked .MuiSvgIcon-root": {
+                    fill: theme.palette.secondary.light,
+                  },
+                })}
               />
             </TableCell>
 
