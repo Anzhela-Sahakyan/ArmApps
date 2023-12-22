@@ -144,7 +144,7 @@ export default function EditBannerModal({
         </Typography>
 
         <TextField
-          sx={{ marginBottom: "30px", marginTop: "15px" }}
+          sx={{ marginBottom: "30px", marginTop: "15px", width: "100%" }}
           value={editedBanner.name}
           onChange={(e) => handleInputChange("name", e.target.value)}
         />
@@ -160,10 +160,23 @@ export default function EditBannerModal({
           Banner link
         </Typography>
         <TextField
-          sx={{ marginTop: "15px" }}
+          sx={{ marginTop: "15px", width: "100%" }}
           value={editedBanner.link}
           onChange={(e) => handleInputChange("link", e.target.value)}
         />
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          {imagePreview && (
+            <img
+              src={imagePreview}
+              alt={imagePreview}
+              style={{
+                marginTop: "15px",
+                minWidth: "340px",
+                minHeight: "250px",
+              }}
+            />
+          )}
+        </Box>
         <Button
           variant="contained"
           component="label"
@@ -194,14 +207,6 @@ export default function EditBannerModal({
           }
           label="Show in Mobile"
         />
-
-        {imagePreview && (
-          <img
-            src={imagePreview}
-            alt={imagePreview}
-            style={{ marginTop: "15px", maxWidth: "100%" }}
-          />
-        )}
       </DialogContent>
       <DialogActions>
         <Button

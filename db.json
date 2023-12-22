@@ -45,7 +45,7 @@
       "id": 5,
       "name": "Sololearn",
       "image": "/assets/sololearnLight.png",
-      "showInMobile": false
+      "showInMobile": true
     },
     {
       "id": 7,

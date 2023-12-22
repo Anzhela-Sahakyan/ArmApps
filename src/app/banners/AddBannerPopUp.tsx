@@ -30,6 +30,7 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
     showInMobile: false,
     image: null,
   });
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -63,6 +64,12 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
         ...prevData,
         image: selectedFile,
       }));
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+
+      reader.readAsDataURL(selectedFile);
     }
   };
 
@@ -136,7 +143,18 @@ const AddBannerPopUp = ({ isOpen, onClose }: any) => {
           onChange={handleInputChange}
           value={bannerData.googlePlayUrl}
         />
-
+        <Box sx={{ display: "flex", justifyContent: "center", width: "350px" }}>
+          {imagePreview && (
+            <Image
+              src={imagePreview}
+              alt="Image Preview"
+              min-height={60}
+              min-width={100}
+              width={250}
+              height={200}
+            />
+          )}
+        </Box>
         <Button
           variant="contained"
           component="label"
