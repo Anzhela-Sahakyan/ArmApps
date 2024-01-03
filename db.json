@@ -53,5 +53,8 @@
       "image": "/assets/sololearnLight.png",
       "showInMobile": true
     }
-  ]
+  ],
+  "text": {
+    "content": "<p>This is the initial content of the editor.</p>"
+  }
 }

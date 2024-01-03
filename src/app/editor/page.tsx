@@ -1,16 +1,41 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import io from "socket.io-client";
+import axios from "axios";
+
+const socket = io("http://localhost:3003");
 
 export default function EditorPage() {
-  const editorRef = useRef(null);
-  const log = () => {
+  const editorRef = useRef<any>(null);
+
+  useEffect(() => {
+    socket.on("updateContent", (content) => {
+      if (editorRef.current) {
+        editorRef.current.setContent(content);
+      }
+    });
+
+    return () => {};
+  }, []);
+
+  const onSave = async () => {
     if (editorRef.current) {
-      console.log(editorRef.current.getContent());
+      const content = editorRef.current.getContent();
+      console.log(content);
+
+      socket.emit("updateContent", content);
+      try {
+        await axios.patch("http://localhost:3002/text", { content });
+        console.log("text saved");
+      } catch (error) {
+        console.log("Text WASN'T saved");
+      }
     }
   };
-  const filePickerCallback = (callback, value, meta) => {
+
+  const filePickerCallback = (callback: any, value: any, meta: any) => {
     if (meta.filetype === "image") {
       const fileInput = document.createElement("input");
       fileInput.setAttribute("type", "file");
@@ -28,13 +53,17 @@ export default function EditorPage() {
       fileInput.click();
     }
   };
+  const handleChange = (content: any) => {
+    socket.emit("updateContent", content);
 
+    axios.patch("http://localhost:3003/text", { content });
+  };
   return (
     <>
       <Editor
         apiKey="648x67vxw9cwm2pctnh96gvv7s22ln1vbzoxuba686flsmvh"
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue="<p>This is the initial content of the editor.</p>"
+        initialValue="This is the initial content of the editor."
         init={{
           height: 500,
           menubar: false,
@@ -67,8 +96,9 @@ export default function EditorPage() {
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           file_picker_callback: filePickerCallback,
         }}
+        onEditorChange={(content, editor) => handleChange(content)}
       />
-      <button onClick={log}>Log editor content</button>
+      <button onClick={onSave}>Save</button>
     </>
   );
 }
