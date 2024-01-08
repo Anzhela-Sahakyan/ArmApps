@@ -16,8 +16,11 @@ export default function EditorPage() {
         editorRef.current.setContent(content);
       }
     });
+    socket.connect();
 
-    return () => {};
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const onSave = async () => {
